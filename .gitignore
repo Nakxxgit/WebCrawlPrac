@@ -1,0 +1,8 @@
+
+chromedriver
+
+db.sqlite3
+
+result.json
+
+*.pyc
