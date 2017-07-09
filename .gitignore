@@ -8,3 +8,7 @@ result.json
 *.pyc
 
 telegrambot.py
+
+token.txt
+
+latest.txt
