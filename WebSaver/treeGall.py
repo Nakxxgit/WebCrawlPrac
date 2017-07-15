@@ -51,11 +51,10 @@ if __name__=='__main__':
     while True:
         n, t, l = parse_Gall()
         latest = PostData.objects.order_by('-PostNum')[0]
-        print(latest.PostNum)
         if(int(n) != latest.PostNum):
             PostData(title = t, link = l, PostNum = n).save()
             print("새 게시글이 업데이트 되었습니다! 글 제목: ", t)
         else:
-            print("업데이트된 게시글이 없습니다", latest, t)
+            print("업데이트된 게시글이 없습니다")
 
         time.sleep(10)
