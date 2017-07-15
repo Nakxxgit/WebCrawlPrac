@@ -3,31 +3,29 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-url = 'http://gall.dcinside.com/board/lists/?id=tree'
+url = 'http://gall.dcinside.com/board/lists/?id=food'
 header = {'User-Agent': ''}
 
-secret = open('token.txt', 'r')
-token = secret.read()
-
 def parse_Gall():
-
-
 	req = requests.get(url, headers = header)
 	html = req.text
-	soup = BeautifulSoup(html, 'html.parser')
+	soup = BeautifulSoup(html, "html.parser")
 
 	'''titles = soup.select('tbody > tr > td > a.icon_pic_n')'''
 
-	posts = soup.select('tbody > tr.tb')
+	posts_n = soup.find_all(attrs={"class": "t_notice"})
+	posts_t = soup.find_all(attrs={"class": "t_subject"})
 
-	title = posts. select('td > a.icon_pic_n').text
-	link = posts.select('td > a.icon_pic_n').get('href')
-	postNum = posts.select(td.t_notice)
+	return posts_n, posts_t
 
-	for post in posts:
-		post.find()
-
+for n, t in zip(parse_Gall()):
 	try:
+		print(int(n.text))
+		print(t.text)
+	except:
+		pass
+
+'''	try:
 		yield int(postNum.text), title, link
 
 	except:
@@ -36,7 +34,7 @@ def parse_Gall():
 for n, t, l in parse_Gall():
 	print(n,t,l)
 
-'''postNums = soup.select('tbody > tr > td.t_notice')
+postNums = soup.select('tbody > tr > td.t_notice')
 
 for n in postNums:
 
